@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>AutoCut Camera</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <video id="preview" playsinline muted autoplay></video>
+  <canvas id="packed" hidden></canvas>
+
+  <!-- Thanh trạng thái -->
+  <header id="top">
+    <span class="brand">✂ AutoCut Camera</span>
+    <span id="status" class="status">Chưa kết nối</span>
+  </header>
+
+  <!-- Màn kết nối -->
+  <section id="connect" class="sheet">
+    <h2>Kết nối với AutoCut Studio</h2>
+    <p class="muted">Điện thoại và máy tính dùng chung một mạng Wi-Fi. Trên máy tính: tab <b>📷 Camera</b> → ô Camera chọn <b>📱 Điện thoại</b> để hiện mã QR.</p>
+    <button id="qrBtn" class="primary big">📷 Quét mã QR trên máy tính</button>
+    <p class="muted center">— hoặc chọn máy và nhập mã 6 số —</p>
+    <div class="row between">
+      <b>Máy tìm thấy</b>
+      <button id="scan" class="ghost">🔍 Tìm lại</button>
+    </div>
+    <div id="found" class="found"><span class="muted">Đang tìm…</span></div>
+    <details id="manual">
+      <summary>Nhập địa chỉ bằng tay</summary>
+      <div class="row">
+        <input id="host" inputmode="decimal" placeholder="192.168.1.2" autocomplete="off">
+        <input id="port" inputmode="numeric" placeholder="39391" class="port">
+      </div>
+    </details>
+    <label class="lbl">Mã ghép đôi (6 số)</label>
+    <input id="code" inputmode="numeric" maxlength="6" placeholder="••••••" class="code" autocomplete="off">
+    <div class="opts">
+      <label class="switch"><input type="checkbox" id="ai"> <span>✂ Xoá phông ngay trên điện thoại <small class="muted">(chậm ~10 hình/s — nên để máy tính xoá phông)</small></span></label>
+      <label class="switch"><input type="checkbox" id="hd"> <span>1080p (nét hơn, cần Wi-Fi mạnh)</span></label>
+    </div>
+    <button id="go" class="primary big">Kết nối</button>
+    <p id="err" class="err"></p>
+  </section>
+
+  <!-- Quét mã QR -->
+  <section id="scanner" hidden>
+    <div class="qr-frame"></div>
+    <p id="scanHint">Hướng camera vào mã QR trên AutoCut (tab 📷 Camera)</p>
+    <button id="qrCancel" class="big">Huỷ</button>
+  </section>
+
+  <!-- Nút khi đang phát -->
+  <nav id="controls" hidden>
+    <button id="flip" title="Đổi camera trước / sau">🔄<small>Đổi cam</small></button>
+    <button id="aiBtn" title="Xoá phông trên điện thoại">✂<small>Xoá phông</small></button>
+    <button id="micBtn" title="Bật / tắt micro">🎤<small>Micro</small></button>
+    <button id="stop" class="danger" title="Ngắt kết nối">⏹<small>Ngắt</small></button>
+  </nav>
+
+  <script src="jsQR.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
